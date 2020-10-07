@@ -3,7 +3,7 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Add Student</p>
+        <p class="modal-card-title">Edit Student</p>
         <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
       <section class="modal-card-body">
@@ -85,13 +85,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button
-          class="button is-success"
-          :class="submitting ? 'is-loading' : ''"
-          @click="addStudent"
-        >
-          Confirm
-        </button>
+        <button class="button is-success" @click="editStudent">Confirm</button>
         <button class="button" @click="closeModal">Cancel</button>
       </footer>
     </div>
@@ -100,45 +94,25 @@
 
 <script>
 import { bus } from "../main";
-import axios from "axios";
 import vSelect from "vue-select";
 export default {
   components: { "v-select": vSelect },
+  props: ["editedStudent"],
+  mounted() {
+    // bus.$emit("patchStudent", { updatedStudent: this.student });
+  },
+  data() {
+    return {
+      student: this.editedStudent,
+    };
+  },
   methods: {
     closeModal() {
       bus.$emit("closeModals");
     },
-    addStudent() {
-      this.submitting = true;
-      axios.post("http://localhost/newStudent.php", this.student).then(() => {
-        // this.student = {
-        //   name: "",
-        //   ssn: "",
-        //   major: "",
-        //   age: "",
-        //   sex: "",
-        //   address: "",
-        //   gpa: "",
-        // };
-        this.submitting = false;
-        bus.$emit("refreshStudent");
-        bus.$emit("closeModals");
-      });
+    editStudent() {
+      bus.$emit("updatedStudent", this.student);
     },
-  },
-  data() {
-    return {
-      student: {
-        name: "",
-        ssn: "",
-        major: "",
-        age: "",
-        sex: "",
-        address: "",
-        gpa: "",
-      },
-      submitting: false,
-    };
   },
 };
 </script>

@@ -13,7 +13,8 @@
     "bulma": "^0.9.1",
     "core-js": "^3.6.5",
     "tailwindcss": "^1.8.10",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-select": "^3.10.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
