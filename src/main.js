@@ -3,6 +3,7 @@ import App from './App.vue'
 import "./main.css"
 import "bulma"
 
+export const bus = new Vue();
 Vue.config.productionTip = false
 
 new Vue({
